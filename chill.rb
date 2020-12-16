@@ -241,15 +241,13 @@ after_bundle do
   run 'rails generate rspec:install'
   run 'rails db:migrate'
 
-  inject_into_file 'spec/rails_helper.rb', after: "require 'rspec/rails'" do
-    <<-RUBY
+  inject_into_file 'spec/rails_helper.rb', after: "require 'rspec/rails'" do<<-RUBY
     require 'capybara'
     Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |file| require file }
     RUBY
   end
 
-  inject_into_file 'spec/rails_helper.rb', after: 'config.fixture_path = "#{::Rails.root}/spec/fixtures"' do
-    <<-RUBY
+  inject_into_file 'spec/rails_helper.rb', after: 'config.fixture_path = "#{::Rails.root}/spec/fixtures"' do<<-RUBY
       config.include Warden::Test::Helpers
     RUBY
   end
