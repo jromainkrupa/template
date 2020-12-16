@@ -238,7 +238,7 @@ after_bundle do
 
   # SMOOTH RSPEC
     ########################################
-  inject_into_file 'Gemfile', after: 'group :development, :test do' do
+  inject_into_file 'Gemfile', after: 'group :development, :test' do
     <<~RUBY
     gem 'factory_bot_rails'
     gem 'rspec-rails'
