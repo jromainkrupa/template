@@ -13,9 +13,13 @@ end
 
 inject_into_file 'Gemfile', after: 'group :development, :test do' do
   <<-RUBY
+  gem 'capybara'
+  gem 'dotenv-rails'
+  gem 'factory_bot_rails'
   gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'dotenv-rails'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
   RUBY
 end
 
@@ -238,14 +242,6 @@ after_bundle do
 
   # SMOOTH RSPEC
     ########################################
-  inject_into_file 'Gemfile', after: 'group :development, :test' do
-    <<~RUBY
-    gem 'factory_bot_rails'
-    gem 'rspec-rails'
-    gem 'capybara'
-    gem 'shoulda-matchers'
-    RUBY
-  end
   run 'bundle'
   run 'rails generate rspec:install'
 
