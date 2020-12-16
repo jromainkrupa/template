@@ -4,8 +4,8 @@ run "if uname | grep -q 'Darwin'; then pgrep spring | xargs kill -9; fi"
 ########################################
 inject_into_file 'Gemfile', before: 'group :development, :test do' do
   <<~RUBY
-    gem 'devise'
     gem 'autoprefixer-rails'
+    gem 'devise'
     gem 'font-awesome-sass'
     gem 'simple_form'
   RUBY
@@ -245,14 +245,14 @@ after_bundle do
   run 'bundle'
   run 'rails generate rspec:install'
 
-  inject_into_file 'spec/rails_helper', after: "require 'rspec/rails'" do
+  inject_into_file 'spec/rails_helper.rb', after: "require 'rspec/rails'" do
     <<~RUBY
     require 'capybara'
     Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |file| require file }
     RUBY
   end
 
-  inject_into_file 'spec/rails_helper', after: 'config.fixture_path = "#{::Rails.root}/spec/fixtures"' do
+  inject_into_file 'spec/rails_helper.rb', after: 'config.fixture_path = "#{::Rails.root}/spec/fixtures"' do
     <<~RUBY
     config.include Warden::Test::Helpers
     RUBY
