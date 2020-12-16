@@ -249,14 +249,14 @@ after_bundle do
   run 'bundle'
   run 'rails generate rspec:install'
 
-  inject_into_file 'app/spec/rails_helper', after: "require 'rspec/rails'" do
+  inject_into_file 'spec/rails_helper', after: "require 'rspec/rails'" do
     <<~RUBY
     require 'capybara'
     Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |file| require file }
     RUBY
   end
 
-  inject_into_file 'app/spec/rails_helper', after: 'config.fixture_path = "#{::Rails.root}/spec/fixtures"' do
+  inject_into_file 'spec/rails_helper', after: 'config.fixture_path = "#{::Rails.root}/spec/fixtures"' do
     <<~RUBY
     config.include Warden::Test::Helpers
     RUBY
@@ -264,7 +264,7 @@ after_bundle do
 
   run 'mkdir spec/support'
   run 'touch spec/support/factory_bot.rb'
-  inject_into_file. 'spec/support/factory_bot.rb' do
+  inject_into_file 'spec/support/factory_bot.rb' do
   <<~RUBY
     FactoryBot.use_parent_strategy = true
 
@@ -275,7 +275,7 @@ after_bundle do
   end
 
   run 'touch spec/support/shoulda_matchers.rb'
-  inject_into_file. 'spec/support/shoulda_matchers.rb' do
+  inject_into_file 'spec/support/shoulda_matchers.rb' do
   <<~RUBY
     Shoulda::Matchers.configure do |config|
       config.integrate do |with|
